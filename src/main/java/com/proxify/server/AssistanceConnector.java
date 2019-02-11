@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.itrustmynetwork.server;
+package com.proxify.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +12,7 @@ import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.itrustmynetwork.server.bean.BeanLink;
+import com.proxify.server.bean.BeanLink;
 
 /**
  *
