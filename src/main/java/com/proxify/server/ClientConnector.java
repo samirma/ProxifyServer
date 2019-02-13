@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -69,7 +68,7 @@ public class ClientConnector implements Runnable {
 
                 code = Server.md5(uuidString+line).substring(0, 5);
 
-                PrintWriter out = new PrintWriter(os, true);
+                final PrintWriter out = new PrintWriter(os, true);
 
                 out.println(code);
                 out.flush();
@@ -85,6 +84,7 @@ public class ClientConnector implements Runnable {
 
                 ids.put(ident, code);
 
+                //Send current code to client
                 sockets.put(code, beanLink);
                 
                 boolean allowDirectConnect = false;
@@ -128,10 +128,8 @@ public class ClientConnector implements Runnable {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(is));
 
-
                 out.println("check:"+id);
                 out.flush();
-
 
                 String line = in.readLine();
 
@@ -141,8 +139,7 @@ public class ClientConnector implements Runnable {
 
                 return ok;
 
-            } catch (UnknownHostException ex) {
-            } catch (IOException ex) {
+            } catch (Exception ex) {
             }
 
 
@@ -161,9 +158,6 @@ public class ClientConnector implements Runnable {
             while (true) {
 
                 Socket socketClient = socketServerClient.accept();
-
-//                socketClient.setReceiveBufferSize(ServidorJam.buffer.length);
-//                socketClient.setSendBufferSize(ServidorJam.buffer.length);
 
                 new Thread(new PoolCliente(socketClient)).start();
 

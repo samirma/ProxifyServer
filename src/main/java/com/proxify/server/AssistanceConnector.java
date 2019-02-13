@@ -87,7 +87,7 @@ public class AssistanceConnector implements Runnable {
 
                     Server.conexao++;
 
-                    if (beanLink.directConnection) {
+                    if (beanLink.directConnection) { //Support direct connection
 
                         String ipString = assistanceSocket.getRemoteSocketAddress().toString();
                         ipString = Server.formatIP(ipString);
